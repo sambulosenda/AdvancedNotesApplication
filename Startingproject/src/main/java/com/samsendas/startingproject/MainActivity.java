@@ -7,7 +7,9 @@ import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import com.samsendas.startingproject.com.samsendas.startingproject.data.NoteItem;
 import com.samsendas.startingproject.com.samsendas.startingproject.data.NotesDataSource;
 
@@ -64,5 +66,13 @@ public class MainActivity extends ListActivity{
         startActivityForResult(intent, 1001);
     }
 
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
 
+        NoteItem note = notesList.get(position);
+        Intent intent = new Intent(this, NoteAditorActivity.class);
+        intent.putExtra("Key", note.getKey());
+        intent.putExtra("text", note.getText());
+        startActivityForResult(intent, 1001);
+    }
 }
